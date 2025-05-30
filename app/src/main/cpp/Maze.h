@@ -46,8 +46,7 @@ private:
     void nextLevel(pair<int,int> playerPos);
     void paintBackground();
     void checkCollision(pair<int,int>& ghostPosition, pair<int,int>& playerPosition);
-    pair<int, int> findPlayer(const vector<vector<string>>& stringArr,
-                              const string& keyString);
+    pair<int, int> findItemFromMap(const string& keyString);
 
 private:
     vector<vector<string>> m_map;
