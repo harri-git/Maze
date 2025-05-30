@@ -112,10 +112,16 @@ string Maze::getMap(){
 
 
 int Maze::moveItem(int aDirection){
+    if(m_game_over)
+        return m_points;
 
     pair<int, int> playerPos = findPlayer(m_map, player);
+    pair<int,int> ghostPos = findPlayer(m_map, ghost);
+    checkCollision(ghostPos,playerPos);
     if(playerPos.first != -1 && playerPos.second != -1) {
         moveTo((direction) aDirection, playerPos);
+        playerPos = findPlayer(m_map, player);
+        checkCollision(ghostPos,playerPos);
         pair<int, int> prizeInMap = findPlayer(m_map, prize);
         if (prizeInMap.first == -1 && prizeInMap.second == -1) {
             nextLevel(playerPos);
@@ -226,7 +232,7 @@ void Maze::setGhostPosition(pair<int, int>& newGhostPosition) {
 }
 
 void Maze::checkCollision(pair<int,int>& ghostPosition, pair<int,int>& playerPosition){
-    if( ghostPosition == playerPosition){
+    if(ghostPosition == playerPosition){
         m_game_over = true;
         m_gameRound = 1;
     }
