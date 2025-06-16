@@ -85,7 +85,7 @@ void Maze::clearMap(){
 
 void Maze::addPrizes(){
  int amountOfBalls=10;
- for (int i=0; i < amountOfBalls+1; i++){
+ for (int i=0; i < amountOfBalls; i++){
      int ballWidthCoordinate = rand() % m_width - 1;
      int ballHeightCoordinate = rand() % m_height;
 

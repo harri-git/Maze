@@ -16,16 +16,20 @@ BonusPoints::~BonusPoints(){
 
 
 void BonusPoints::createTimerThead(){
-    m_thread = std::shared_ptr<std::thread>(new thread(&BonusPoints::Process, this));
-    m_thread->detach();
+    if(!m_thread) {
+        m_thread = std::shared_ptr<std::thread>(new thread(&BonusPoints::Process, this));
+        m_thread->detach();
+    }
     m_isActive = true;
 }
 
 void BonusPoints::Process(){
     shared_ptr<Maze> maze = Maze::instance();
-    while(m_isActive){
-        std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-        maze->setBonus();
+    while(1){
+        if(m_isActive){
+            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+            maze->setBonus();
+        }
     }
 }
 
