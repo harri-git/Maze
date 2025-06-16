@@ -29,6 +29,7 @@ private:
     Ghost(Ghost const&) = delete;
     Ghost& operator=(Ghost const&) = delete;
     void Process();
+    void setTimeOutForGhost(int gameRound);
 private:
    std::unique_ptr<std::thread> m_thread;
    std::queue<std::shared_ptr<ThreadMessage>> m_queue;

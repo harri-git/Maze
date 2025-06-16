@@ -30,22 +30,7 @@ void Ghost::Process()
     shared_ptr<Maze> maze = Maze::instance();
     while (1)
     {
-        int gameRound = maze->getGameRound();
-        if(gameRound == 1)
-            m_timeOutInMilliseconds = 1000;
-        if(gameRound == 2)
-            m_timeOutInMilliseconds = 750;
-        if(gameRound == 3)
-            m_timeOutInMilliseconds = 500;
-        if(gameRound == 3)
-            m_timeOutInMilliseconds = 300;
-        if(gameRound == 4 )
-            m_timeOutInMilliseconds = 250;
-        if(gameRound == 5 )
-            m_timeOutInMilliseconds = 200;
-        if(gameRound >= 6 )
-            m_timeOutInMilliseconds = 120;
-
+        setTimeOutForGhost(maze->getGameRound());
         bool gameOver = maze->isGameOver();
         int skipMessages = 0;
         if(gameOver)
@@ -71,6 +56,37 @@ void Ghost::Process()
         }
         auto newPos = std::static_pointer_cast<newGhostPosition>(msg->msg);
         maze->setGhostPosition(newPos->pos);
+    }
+}
+
+void Ghost::setTimeOutForGhost(int gameRound){
+    switch(gameRound){
+        case 1: {
+            m_timeOutInMilliseconds = 1000;
+            break;
+        }
+        case 2: {
+            m_timeOutInMilliseconds = 750;
+            break;
+        }
+        case 3: {
+            m_timeOutInMilliseconds = 500;
+            break;
+        }
+        case 4: {
+            m_timeOutInMilliseconds = 300;
+            break;
+        }
+        case 5: {
+            m_timeOutInMilliseconds = 250;
+            break;
+        }
+        case 6: {
+            m_timeOutInMilliseconds = 200;
+            break;
+        }
+        default:
+            break;
     }
 }
 
