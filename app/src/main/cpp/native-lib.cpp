@@ -80,7 +80,7 @@ Java_com_example_maze_MainActivity_moveItem(JNIEnv* env, jobject /* this */,
         return points;
 
     std::shared_ptr<newGhostPosition> data(new newGhostPosition());
-    pair<int,int> currPlayerPos = maze->getPlayerPosition();
+    auto currPlayerPos = maze->getPlayerPosition();
     data->pos.first=currPlayerPos.first;
     data->pos.second= currPlayerPos.second;
 

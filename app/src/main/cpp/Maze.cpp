@@ -115,14 +115,14 @@ int Maze::moveItem(int aDirection){
     if(m_game_over)
         return m_points;
 
-    pair<int, int> playerPos = findItemFromMap(player);
-    pair<int,int> ghostPos = findItemFromMap(ghost);
+    auto playerPos = findItemFromMap(player);
+    auto ghostPos = findItemFromMap(ghost);
     checkCollision(ghostPos,playerPos);
     if(playerPos.first != -1 && playerPos.second != -1) {
         moveTo((direction) aDirection, playerPos);
         playerPos = findItemFromMap(player);
         checkCollision(ghostPos,playerPos);
-        pair<int, int> prizeInMap = findItemFromMap(prize);
+        auto prizeInMap = findItemFromMap(prize);
         if (prizeInMap.first == -1 && prizeInMap.second == -1) {
             nextLevel(playerPos);
         }
@@ -219,12 +219,12 @@ void Maze::setGhostPosition(pair<int, int>& newGhostPosition) {
     if(newGhostPosition.first == -1 || newGhostPosition.second == -1)
         return;
 
-    pair<int,int> currGhost = findItemFromMap(ghost);
+    auto currGhost = findItemFromMap(ghost);
     if(currGhost.first != -1 && currGhost.second != -1 ){
         m_map[currGhost.first][currGhost.second] = m_backround;
     }
 
-    pair<int,int> currPlayer = findItemFromMap(player);
+    auto currPlayer = findItemFromMap(player);
     checkCollision(newGhostPosition, currPlayer);
     checkCollision(currGhost, currPlayer);
     m_map[newGhostPosition.first][newGhostPosition.second] = ghost;
@@ -239,7 +239,7 @@ void Maze::checkCollision(pair<int,int>& ghostPosition, pair<int,int>& playerPos
 
 void Maze::setBonus(){
 
-    pair currentBonus = findItemFromMap(bonus);
+    auto currentBonus = findItemFromMap(bonus);
     if(currentBonus.first != -1 && currentBonus.second != -1){
         m_map[currentBonus.first][currentBonus.second] = m_backround;
     }
