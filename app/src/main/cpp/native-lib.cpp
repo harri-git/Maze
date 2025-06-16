@@ -75,9 +75,12 @@ Java_com_example_maze_MainActivity_moveItem(JNIEnv* env, jobject /* this */,
 
     shared_ptr<Maze> maze = Maze::instance();
     int points = maze->moveItem(direction);
-    pair<int,int> currPlayerPos = maze->getPlayerPosition();
+
+    if(maze->isGameOver())
+        return points;
 
     std::shared_ptr<newGhostPosition> data(new newGhostPosition());
+    pair<int,int> currPlayerPos = maze->getPlayerPosition();
     data->pos.first=currPlayerPos.first;
     data->pos.second= currPlayerPos.second;
 
